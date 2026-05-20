@@ -1,0 +1,289 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== Pet Container ========== */
+.pet-container {
+  width: 100%;
+  min-height: 300px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: grab;
+  position: relative;
+}
+.pet-container:active {
+  cursor: grabbing;
+}
+
+/* ========== SVG Wrapper ========== */
+#svgWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  min-height: 140px;
+  flex-shrink: 1;
+}
+#svgWrap svg {
+  width: 100%;
+  height: 100%;
+  transform-origin: center bottom;
+}
+
+/* ========== SVG Expression Toggles ========== */
+/* Hide all expression groups by default */
+#svgWrap .eye-group,
+#svgWrap .mouth-group,
+#svgWrap .brow-happy,
+#svgWrap .brow-normal {
+  display: none;
+}
+
+/* idle */
+#svgWrap.state-idle .eye-normal,
+#svgWrap.state-idle .mouth-normal,
+#svgWrap.state-idle .brow-normal {
+  display: block;
+}
+
+/* talking */
+#svgWrap.state-talking .eye-normal,
+#svgWrap.state-talking .mouth-talking,
+#svgWrap.state-talking .brow-normal {
+  display: block;
+}
+
+/* happy */
+#svgWrap.state-happy .eye-happy,
+#svgWrap.state-happy .mouth-happy,
+#svgWrap.state-happy .brow-happy {
+  display: block;
+}
+
+/* angry */
+#svgWrap.state-angry .eye-angry,
+#svgWrap.state-angry .mouth-pout {
+  display: block;
+}
+
+/* sleep */
+#svgWrap.state-sleep .eye-sleepy,
+#svgWrap.state-sleep .mouth-normal,
+#svgWrap.state-sleep .brow-normal {
+  display: block;
+}
+
+/* walk */
+#svgWrap.state-walk .eye-normal,
+#svgWrap.state-walk .mouth-normal,
+#svgWrap.state-walk .brow-normal {
+  display: block;
+}
+
+/* ========== CSS Animations ========== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+#svgWrap.state-idle svg {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes talk {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-2px) rotate(-2deg); }
+  75%      { transform: translateY(-1px) rotate(2deg); }
+}
+#svgWrap.state-talking svg {
+  animation: talk 0.4s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  20%      { transform: translateY(-12px) rotate(-3deg); }
+  40%      { transform: translateY(0) rotate(3deg); }
+  60%      { transform: translateY(-6px) rotate(-2deg); }
+  80%      { transform: translateY(-2px) rotate(1deg); }
+}
+#svgWrap.state-happy svg {
+  animation: bounce 0.6s ease-in-out 4;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-4px); }
+  80%      { transform: translateX(4px); }
+}
+#svgWrap.state-angry svg {
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+@keyframes sway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-2px) rotate(-2deg); }
+  75%      { transform: translateY(-1px) rotate(2deg); }
+}
+#svgWrap.state-sleep svg {
+  animation: sway 4s ease-in-out infinite;
+  opacity: 0.85;
+}
+
+@keyframes walkAnim {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-4px) rotate(-4deg); }
+  75%      { transform: translateY(-2px) rotate(4deg); }
+}
+#svgWrap.state-walk svg {
+  animation: walkAnim 0.35s ease-in-out infinite;
+}
+
+/* ========== Speech Bubble ========== */
+.bubble-container {
+  position: relative;
+  margin-bottom: 2px;
+}
+.bubble {
+  max-width: 240px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #333;
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  word-wrap: break-word;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  position: relative;
+}
+.bubble.show {
+  opacity: 1;
+}
+/* Bubble tail */
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -7px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid rgba(255, 255, 255, 0.94);
+}
+
+/* ========== ZZZ Indicator ========== */
+.zzz {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  font-size: 14px;
+  color: #aaa;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.zzz.visible {
+  opacity: 1;
+  animation: zzzFade 2.5s ease-in-out infinite;
+}
+@keyframes zzzFade {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+  50%      { transform: translateY(-10px) scale(1.2); opacity: 1; }
+}
+
+/* ========== Chat Box ========== */
+.chat-box {
+  display: flex;
+  gap: 6px;
+  padding: 4px 8px 6px;
+}
+.chat-box input {
+  flex: 1;
+  border: 1px solid rgba(180, 180, 180, 0.4);
+  border-radius: 10px;
+  padding: 7px 10px;
+  outline: none;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.85);
+  transition: border-color 0.2s;
+}
+.chat-box input:focus {
+  border-color: rgba(140, 180, 255, 0.6);
+}
+.chat-box button,
+.quick-actions button {
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #555;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.chat-box button:hover,
+.quick-actions button:hover {
+  background: rgba(200, 220, 255, 0.85);
+}
+
+/* ========== Quick Actions ========== */
+.quick-actions {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 8px;
+}
+
+/* ========== Right-Click Context Menu ========== */
+.context-menu {
+  position: fixed;
+  min-width: 110px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 10px;
+  padding: 5px 0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+  z-index: 1000;
+}
+.context-menu.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.context-menu .menu-item {
+  padding: 7px 16px;
+  font-size: 13px;
+  color: #444;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.context-menu .menu-item:hover {
+  background: rgba(200, 220, 255, 0.5);
+}
+.context-menu .menu-divider {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: 3px 12px;
+}

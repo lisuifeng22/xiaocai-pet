@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300">
+  <defs>
+    <linearGradient id="furGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5D371"/>
+      <stop offset="100%" stop-color="#E8B84A"/>
+    </linearGradient>
+    <linearGradient id="bellyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF8E7"/>
+      <stop offset="100%" stop-color="#FDECCE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ========== Tail ========== -->
+  <path d="M155,210 Q190,190 185,145 Q182,120 168,110"
+        stroke="#E8B84A" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <path d="M168,110 Q165,107 162,110"
+        stroke="#C4893A" stroke-width="16" fill="none" stroke-linecap="round"/>
+
+  <!-- ========== Body ========== -->
+  <ellipse cx="100" cy="195" rx="62" ry="68" fill="url(#furGrad)"/>
+
+  <!-- Belly white patch -->
+  <ellipse cx="100" cy="210" rx="38" ry="48" fill="url(#bellyGrad)"/>
+
+  <!-- Tabby stripes on body -->
+  <path d="M52,170 Q70,165 90,170" stroke="#D4A44A" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M110,170 Q130,165 148,170" stroke="#D4A44A" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M55,190 Q75,185 95,190" stroke="#D4A44A" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M105,190 Q125,185 145,190" stroke="#D4A44A" stroke-width="2.5" fill="none" opacity="0.5"/>
+
+  <!-- ========== Hind legs / Thighs ========== -->
+  <ellipse cx="65" cy="240" rx="30" ry="28" fill="#E8B84A"/>
+  <ellipse cx="135" cy="240" rx="30" ry="28" fill="#E8B84A"/>
+
+  <!-- ========== Front Paws ========== -->
+  <ellipse cx="72" cy="268" rx="18" ry="12" fill="url(#furGrad)"/>
+  <ellipse cx="128" cy="268" rx="18" ry="12" fill="url(#furGrad)"/>
+  <!-- Paw pads -->
+  <ellipse cx="72" cy="272" rx="5" ry="3.5" fill="#FFB5B5" opacity="0.7"/>
+  <ellipse cx="128" cy="272" rx="5" ry="3.5" fill="#FFB5B5" opacity="0.7"/>
+
+  <!-- ========== Head ========== -->
+  <ellipse cx="100" cy="90" rx="56" ry="50" fill="url(#furGrad)"/>
+
+  <!-- ========== Ears ========== -->
+  <!-- Left ear -->
+  <polygon points="48,70 34,24 68,52" fill="url(#furGrad)"/>
+  <polygon points="50,65 40,32 64,55" fill="#FFB5B5"/>
+  <!-- Right ear -->
+  <polygon points="152,70 166,24 132,52" fill="url(#furGrad)"/>
+  <polygon points="150,65 160,32 136,55" fill="#FFB5B5"/>
+
+  <!-- ========== Ear Tufts ========== -->
+  <path d="M36,30 L34,24 L40,30" stroke="#D4A44A" stroke-width="1.5" fill="none"/>
+  <path d="M164,30 L166,24 L160,30" stroke="#D4A44A" stroke-width="1.5" fill="none"/>
+
+  <!-- ========== Face Details ========== -->
+
+  <!-- Cheeks -->
+  <ellipse cx="58" cy="105" rx="18" ry="14" fill="#FDECCE" opacity="0.6"/>
+  <ellipse cx="142" cy="105" rx="18" ry="14" fill="#FDECCE" opacity="0.6"/>
+
+  <!-- Blush -->
+  <ellipse cx="62" cy="108" rx="12" ry="7" fill="#FFB5B5" opacity="0.35"/>
+  <ellipse cx="138" cy="108" rx="12" ry="7" fill="#FFB5B5" opacity="0.35"/>
+
+  <!-- Forehead tabby M marking -->
+  <path d="M82,68 L90,78 L100,66 L110,78 L118,68" stroke="#D4A44A" stroke-width="2.5" fill="none" opacity="0.5"/>
+
+  <!-- Whiskers -->
+  <g stroke="#888" stroke-width="1.2" fill="none" opacity="0.6">
+    <path d="M52,102 L18,95"/>
+    <path d="M52,107 L15,107"/>
+    <path d="M52,112 L18,119"/>
+    <path d="M148,102 L182,95"/>
+    <path d="M148,107 L185,107"/>
+    <path d="M148,112 L182,119"/>
+  </g>
+
+  <!-- ========== Nose ========== -->
+  <polygon points="100,108 95,115 105,115" fill="#FF8A8A"/>
+
+  <!-- ========== EYES: Normal (big cute) ========== -->
+  <g class="eye-group eye-normal">
+    <ellipse cx="78" cy="95" rx="14" ry="15" fill="#4A6741"/>
+    <ellipse cx="122" cy="95" rx="14" ry="15" fill="#4A6741"/>
+    <!-- Pupils -->
+    <ellipse cx="80" cy="95" rx="8" ry="12" fill="#1A1A1A"/>
+    <ellipse cx="124" cy="95" rx="8" ry="12" fill="#1A1A1A"/>
+    <!-- Highlights -->
+    <circle cx="83" cy="89" r="5" fill="white"/>
+    <circle cx="127" cy="89" r="5" fill="white"/>
+    <circle cx="76" cy="99" r="2.5" fill="white"/>
+    <circle cx="120" cy="99" r="2.5" fill="white"/>
+    <!-- Eye shine -->
+    <circle cx="84" cy="87" r="2" fill="white" opacity="0.8"/>
+    <circle cx="128" cy="87" r="2" fill="white" opacity="0.8"/>
+    <!-- Eyeliner -->
+    <path d="M63,95 Q70,82 78,80 Q86,82 93,95" stroke="#3A2A1A" stroke-width="1.5" fill="none" opacity="0.4"/>
+    <path d="M107,95 Q114,82 122,80 Q130,82 137,95" stroke="#3A2A1A" stroke-width="1.5" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- ========== EYES: Happy (squinted) ========== -->
+  <g class="eye-group eye-happy">
+    <path d="M64,95 Q78,80 92,95" stroke="#1A1A1A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M108,95 Q122,80 136,95" stroke="#1A1A1A" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M64,97 Q78,92 92,97" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <path d="M108,97 Q122,92 136,97" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <!-- Lower lashes -->
+    <path d="M67,98 L72,100" stroke="#3A2A1A" stroke-width="1" fill="none" opacity="0.5"/>
+    <path d="M133,98 L128,100" stroke="#3A2A1A" stroke-width="1" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- ========== EYES: Angry ========== -->
+  <g class="eye-group eye-angry">
+    <ellipse cx="78" cy="97" rx="11" ry="10" fill="#4A6741"/>
+    <ellipse cx="122" cy="97" rx="11" ry="10" fill="#4A6741"/>
+    <ellipse cx="80" cy="97" rx="7" ry="9" fill="#1A1A1A"/>
+    <ellipse cx="124" cy="97" rx="7" ry="9" fill="#1A1A1A"/>
+    <circle cx="82" cy="93" r="4" fill="white"/>
+    <circle cx="126" cy="93" r="4" fill="white"/>
+    <circle cx="77" cy="100" r="2" fill="white"/>
+    <circle cx="121" cy="100" r="2" fill="white"/>
+    <!-- Angry eyebrows (slanted down inward) -->
+    <line x1="62" y1="78" x2="90" y2="85" stroke="#3A2A1A" stroke-width="3.5" stroke-linecap="round"/>
+    <line x1="138" y1="78" x2="110" y2="85" stroke="#3A2A1A" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- ========== EYES: Sleepy (closed) ========== -->
+  <g class="eye-group eye-sleepy">
+    <path d="M64,95 Q78,88 92,95" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M108,95 Q122,88 136,95" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Sleepy lashes -->
+    <path d="M63,94 L60,97" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+    <path d="M137,94 L140,97" stroke="#1A1A1A" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <!-- ========== MOUTH: Normal ========== -->
+  <g class="mouth-group mouth-normal">
+    <path d="M93,122 Q100,126 107,122" stroke="#D46868" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- Tiny open mouth -->
+    <ellipse cx="100" cy="125" rx="3" ry="2" fill="#D46868" opacity="0.3"/>
+  </g>
+
+  <!-- ========== MOUTH: Talking (open) ========== -->
+  <g class="mouth-group mouth-talking">
+    <path d="M90,120 Q100,126 110,120" stroke="#D46868" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="100" cy="123" rx="6" ry="5" fill="#D46868"/>
+    <ellipse cx="100" cy="124" rx="3.5" ry="2.5" fill="#FF8A8A" opacity="0.5"/>
+  </g>
+
+  <!-- ========== MOUTH: Happy ========== -->
+  <g class="mouth-group mouth-happy">
+    <path d="M88,118 Q100,130 112,118" stroke="#D46868" stroke-width="2" fill="#FF9EB5" stroke-linecap="round"/>
+    <!-- Tiny tongue -->
+    <ellipse cx="100" cy="124" rx="4" ry="3" fill="#FF6B8A" opacity="0.5"/>
+  </g>
+
+  <!-- ========== MOUTH: Pout ========== -->
+  <g class="mouth-group mouth-pout">
+    <path d="M92,125 Q100,119 108,125" stroke="#D46868" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- ========== Normal brows ========== -->
+  <g class="brow-normal">
+    <!-- Cats don't have brows, but we use the fur markings above eyes -->
+    <path d="M66,80 Q78,76 90,80" stroke="#D4A44A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path d="M110,80 Q122,76 134,80" stroke="#D4A44A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- ========== Happy brows (raised) ========== -->
+  <g class="brow-happy">
+    <path d="M66,76 Q78,71 90,76" stroke="#D4A44A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M110,76 Q122,71 134,76" stroke="#D4A44A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- ========== Collar ========== -->
+  <path d="M72,132 Q100,142 128,132" stroke="#E8475A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Bell -->
+  <circle cx="100" cy="140" r="6" fill="#FFD700"/>
+  <circle cx="100" cy="140" r="4" fill="#FFC107"/>
+  <!-- Bell dot -->
+  <circle cx="100" cy="142" r="1.5" fill="#D4A000"/>
+  <!-- Bell line -->
+  <line x1="97" y1="138" x2="103" y2="138" stroke="#D4A000" stroke-width="0.8"/>
+  <line x1="100" y1="138" x2="100" y2="140" stroke="#D4A000" stroke-width="0.8"/>
+</svg>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>小菜桌宠</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="pet-container">
+    <div class="zzz">Z z Z</div>
+    <div class="bubble-container">
+      <div id="bubble" class="bubble">你终于来了？</div>
+    </div>
+    <div id="svgWrap" class="state-idle"></div>
+  </div>
+
+  <div class="chat-box">
+    <input id="userInput" placeholder="和小菜说点什么..." />
+    <button id="sendBtn">发送</button>
+  </div>
+
+  <div class="quick-actions">
+    <button onclick="window.startPomodoro(25)">专注 25 分</button>
+    <button onclick="window.startPomodoro(5)">休息 5 分</button>
+  </div>
+
+  <!-- Right-click Context Menu -->
+  <div class="context-menu" id="contextMenu">
+    <div class="menu-item" data-action="feed">喂食</div>
+    <div class="menu-item" data-action="talk">说说话</div>
+    <div class="menu-divider"></div>
+    <div class="menu-item" data-action="settings">设置</div>
+    <div class="menu-divider"></div>
+    <div class="menu-item" data-action="quit">退出</div>
+  </div>
+
+  <script src="./pet.js"></script>
+</body>
+</html>

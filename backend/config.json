@@ -1,0 +1,9 @@
+{
+  "app_name": "小菜桌宠",
+  "voice_enabled": true,
+  "voice_name": "default",
+  "personality": "嘴毒但关心人",
+  "auto_speak": true,
+  "default_state": "idle",
+  "backend_port": 5000
+}

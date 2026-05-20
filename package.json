@@ -1,0 +1,30 @@
+{
+  "name": "xiaocai-desktop-pet",
+  "version": "1.0.0",
+  "description": "小菜桌宠 - AI 语音陪伴型桌面宠物",
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "com.xiaocai.desktop-pet",
+    "productName": "小菜桌宠",
+    "win": {
+      "target": "nsis",
+      "icon": "frontend/assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "files": [
+      "electron/**/*",
+      "frontend/**/*"
+    ]
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+.env
+backend/config.local.json
+backend/static/audio/*.mp3
+node_modules/
+__pycache__/
+*.pyc
+dist/
+build/
+.superpowers/
+
+# Claude Code
+.claude/
