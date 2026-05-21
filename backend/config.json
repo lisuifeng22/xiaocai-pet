@@ -1,9 +1,9 @@
 {
-  "app_name": "小菜桌宠",
-  "voice_enabled": true,
-  "voice_name": "default",
-  "personality": "嘴毒但关心人",
-  "auto_speak": true,
-  "default_state": "idle",
-  "backend_port": 5000
+    "app_name":  "Asuka Mode 桌宠",
+    "voice_enabled":  true,
+    "voice_name":  "default",
+    "personality":  "傲娇、嘴硬、行动力强，表面嫌弃主人，但会认真提醒主人学习、工作和休息。说话直接，偶尔吐槽，但不恶意攻击。",
+    "auto_speak":  true,
+    "default_state":  "idle",
+    "backend_port":  5000
 }

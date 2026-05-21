@@ -32,13 +32,13 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 180px;
-  min-height: 140px;
+  width: 190px;
+  min-height: 230px;
   flex-shrink: 1;
 }
-#svgWrap svg {
-  width: 100%;
-  height: 100%;
+#svgWrap svg { opacity: 1;
+  width: 120px;
+  min-height: 144px;
   transform-origin: center bottom;
 }
 
@@ -139,7 +139,7 @@ html, body {
 }
 #svgWrap.state-sleep svg {
   animation: sway 4s ease-in-out infinite;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 @keyframes walkAnim {
@@ -286,4 +286,10 @@ html, body {
   height: 1px;
   background: rgba(0, 0, 0, 0.08);
   margin: 3px 12px;
+}
+
+/* Asuka character patch */
+#svgWrap {
+  width: 120px;
+  min-height: 144px;
 }

@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "role": "user",
+    "content": "今天很忙啊"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:neutral] 哼，忙着摸鱼打游戏吧？我可都看见了，你的鼠标在屏幕上晃了半小时都没点开正经页面。"
+  }
+]

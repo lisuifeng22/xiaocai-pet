@@ -16,14 +16,12 @@ let isDragging = false;
 let dragStartX = 0, dragStartY = 0;
 
 const BUBBLE_PHRASES = [
-  "你好呀 ~",
-  "今天好闲…",
-  "陪我玩！",
-  "肚子饿了…",
-  "嘿嘿！",
-  "好无聊…",
-  "你终于来了？",
-  "哼！"
+  "你终于来了？也太慢了吧。",
+  "别发呆，快做正事。",
+  "哼，我才不是在等你。",
+  "今天也要认真一点。",
+  "喂，别把我晾在这儿。",
+  "完成了？还不错嘛。"
 ];
 
 // ===== Init: Fetch and inline SVG =====
@@ -55,7 +53,7 @@ function setPetState(state) {
   document.querySelector(".zzz").classList.toggle("visible", state === "sleep");
 
   if (state === "sleep") {
-    showBubble("zZZ...");
+    showBubble("Zzz...");
   }
 
   // Reset idle timer on interaction
@@ -167,7 +165,7 @@ ctxMenu.addEventListener("click", (e) => {
 
   switch (action) {
     case "feed":
-      showBubble("好吃！再来点？");
+      showBubble("哼……还算合格。");
       setPetState("happy");
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => setPetState("idle"), 2500);
@@ -179,7 +177,7 @@ ctxMenu.addEventListener("click", (e) => {
       idleTimer = setTimeout(() => setPetState("idle"), 2000);
       break;
     case "settings":
-      showBubble("设置还没做好呢 ~");
+      showBubble("设置还没做好，别催。");
       break;
     case "quit":
       if (window.electronAPI?.closeWindow) {
@@ -194,7 +192,7 @@ async function sendMessage() {
   const text = userInput.value.trim();
   if (!text) return;
 
-  showBubble("让我想想...");
+  showBubble("等一下，我在想。");
   setPetState("idle");
   userInput.value = "";
 
@@ -206,7 +204,7 @@ async function sendMessage() {
     });
 
     if (!res.ok) {
-      showBubble("啊？我好像断网了…");
+      showBubble("网络断了？真麻烦。");
       return;
     }
 
@@ -222,7 +220,7 @@ async function sendMessage() {
       audio.onended = () => setPetState("idle");
     }
   } catch (err) {
-    showBubble("啊？我好像断网了…");
+    showBubble("网络断了？真麻烦。");
   }
 }
 
