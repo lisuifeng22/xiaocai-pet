@@ -14,6 +14,8 @@ let sleepTimer = null;
 let bubbleTimer = null;
 let isDragging = false;
 let dragStartX = 0, dragStartY = 0;
+let dragPetOffset = 0;
+let wasDragged = false;
 
 const BUBBLE_PHRASES = [
   "你终于来了？也太慢了吧。",
@@ -103,33 +105,39 @@ function showRandomBubble() {
 svgWrap.addEventListener("mousedown", (e) => {
   if (e.button !== 0) return;
   isDragging = true;
+  wasDragged = false;
   dragStartX = e.clientX;
   dragStartY = e.clientY;
-  setPetState("walk");
+  dragPetOffset = Math.round(svgWrap.getBoundingClientRect().top);
+  svgWrap.classList.add("state-walk");
 });
 
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
+  wasDragged = true;
   const dx = e.clientX - dragStartX;
   const dy = e.clientY - dragStartY;
   dragStartX = e.clientX;
   dragStartY = e.clientY;
 
   if (window.electronAPI?.dragWindow) {
-    window.electronAPI.dragWindow(dx, dy);
+    window.electronAPI.dragWindow(dx, dy, dragPetOffset);
   }
 });
 
 document.addEventListener("mouseup", () => {
   if (isDragging) {
     isDragging = false;
-    setPetState("idle");
+    svgWrap.classList.remove("state-walk");
   }
 });
 
 // ===== Click → Reaction =====
 svgWrap.addEventListener("click", (e) => {
-  if (isDragging) return;
+  if (isDragging || wasDragged) {
+    wasDragged = false;
+    return;
+  }
   setPetState("happy");
   showRandomBubble();
   // Revert to idle after happy animation finishes (4 cycles * 0.6s)

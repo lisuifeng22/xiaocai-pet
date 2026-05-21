@@ -142,13 +142,12 @@ html, body {
   opacity: 1;
 }
 
-@keyframes walkAnim {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-4px) rotate(-4deg); }
-  75%      { transform: translateY(-2px) rotate(4deg); }
+@keyframes walkPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.9; }
 }
 #svgWrap.state-walk svg {
-  animation: walkAnim 0.35s ease-in-out infinite;
+  /* Static during drag — no transform animation to avoid repaint jitter */
 }
 
 /* ========== Speech Bubble ========== */
@@ -217,7 +216,9 @@ html, body {
   padding: 4px 8px 6px;
 }
 .chat-box input {
-  flex: 1;
+  flex: none;
+  width: calc(100% - 56px);
+  box-sizing: border-box;
   border: 1px solid rgba(180, 180, 180, 0.4);
   border-radius: 10px;
   padding: 7px 10px;
@@ -229,7 +230,20 @@ html, body {
 .chat-box input:focus {
   border-color: rgba(140, 180, 255, 0.6);
 }
-.chat-box button,
+.chat-box button {
+  flex: none;
+  width: 50px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #555;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
 .quick-actions button {
   border: none;
   border-radius: 10px;

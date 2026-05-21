@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
 
 let win;
@@ -24,10 +24,16 @@ function createWindow() {
   win.setAlwaysOnTop(true, "screen-saver");
 }
 
-ipcMain.on("drag-window", (_, { deltaX, deltaY }) => {
-  if (!win) return;
-  const [x, y] = win.getPosition();
-  win.setPosition(x + deltaX, y + deltaY);
+ipcMain.on("drag-window", (_, { deltaX, deltaY, petOffset }) => {
+  if (!win || typeof petOffset !== "number") return;
+  try {
+    const [x, y] = win.getPosition();
+    const [w, h] = win.getSize();
+    const display = screen.getDisplayNearestPoint({ x: x + w / 2, y: y + h / 2 });
+    const topBound = display.bounds.y - petOffset;
+    const bottomBound = display.workArea.y + display.workArea.height - h;
+    win.setPosition(x + deltaX, Math.max(topBound, Math.min(bottomBound, y + deltaY)));
+  } catch (_) {}
 });
 
 ipcMain.on("close-window", () => {
