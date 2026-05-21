@@ -12,16 +12,20 @@ body {
   flex-direction: column;
 }
 
-/* ========== Pet Container ========== */
-.pet-container {
-  width: 100%;
-  min-height: 300px;
+/* ========== Upper Area ========== */
+.upper-area {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   position: relative;
+}
+
+/* ========== Pet Container ========== */
+.pet-container {
+  width: fit-content;
+  height: fit-content;
 }
 
 #svgWrap {
