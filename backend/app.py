@@ -170,6 +170,11 @@ def build_system_prompt(memory: dict) -> str:
     if mem_text:
         prompt += mem_text
 
+    # 注入当前时间，让小菜有准确的时间感知
+    now = __import__("datetime").datetime.now()
+    time_str = now.strftime("%Y年%m月%d日（%A） %H:%M")
+    prompt += f"\n当前时间：{time_str}"
+
     return prompt
 
 
