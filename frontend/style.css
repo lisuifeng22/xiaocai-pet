@@ -21,11 +21,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  cursor: grab;
   position: relative;
 }
 
-.pet-container:active {
+#svgWrap {
+  cursor: grab;
+}
+
+#svgWrap:active {
   cursor: grabbing;
 }
 
