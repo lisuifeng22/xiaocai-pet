@@ -361,12 +361,14 @@ function updateWindowShape() {
       b = Math.max(b, pr.bottom);
     }
 
-    // Bubble (always in layout)
-    const br = bubbleEl?.getBoundingClientRect();
-    if (br && br.width && br.height) {
-      t = Math.min(t, br.top);
-      l = Math.min(l, br.left);
-      r = Math.max(r, br.right);
+    // Bubble only when visible (pet speaking)
+    if (bubble.classList.contains("show")) {
+      const br = bubbleEl?.getBoundingClientRect();
+      if (br && br.width && br.height) {
+        t = Math.min(t, br.top);
+        l = Math.min(l, br.left);
+        r = Math.max(r, br.right);
+      }
     }
 
     // ZZZ when visible
