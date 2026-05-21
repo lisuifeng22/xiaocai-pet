@@ -38,6 +38,7 @@ fetch("./assets/pet.svg")
     svgWrap.innerHTML = svgContent;
     svgWrap.classList.add("state-idle");
     startIdleTimer();
+    updateWindowShape();
   })
   .catch(() => {
     svgWrap.textContent = "(>_<)";
@@ -46,6 +47,7 @@ fetch("./assets/pet.svg")
     svgWrap.style.paddingTop = "60px";
     svgWrap.classList.add("state-idle");
     startIdleTimer();
+    updateWindowShape();
   });
 
 // ===== State Management =====
@@ -55,6 +57,7 @@ function setPetState(state) {
   currentState = state;
 
   document.querySelector(".zzz").classList.toggle("visible", state === "sleep");
+  updateWindowShape();
 
   if (state === "sleep") {
     showBubble("Zzz...");
@@ -91,8 +94,10 @@ function showBubble(text) {
   bubble.classList.add("show");
 
   clearTimeout(bubbleTimer);
+  updateWindowShape();
   bubbleTimer = setTimeout(() => {
     bubble.classList.remove("show");
+    updateWindowShape();
   }, 4000);
 }
 
@@ -199,11 +204,16 @@ svgWrap.addEventListener("contextmenu", (e) => {
   ctxMenu.style.left = mx + "px";
   ctxMenu.style.top = my + "px";
   ctxMenu.classList.add("show");
+
+  if (window.electronAPI?.setShape) {
+    window.electronAPI.setShape([]);
+  }
 });
 
 document.addEventListener("click", (e) => {
   if (!ctxMenu.contains(e.target) && !svgWrap.contains(e.target)) {
     ctxMenu.classList.remove("show");
+    updateWindowShape();
   }
 });
 
@@ -214,6 +224,7 @@ ctxMenu.addEventListener("click", (e) => {
 
   const action = item.dataset.action;
   ctxMenu.classList.remove("show");
+  updateWindowShape();
 
   switch (action) {
     case "feed":
@@ -329,3 +340,72 @@ document.addEventListener("mousemove", (e) => {
     }
   }
 });
+
+// ===== Window Shape (OS-level clip) =====
+function updateWindowShape() {
+  const padding = 6;
+
+  requestAnimationFrame(() => {
+    const petEl = document.querySelector(".pet-container");
+    const bubbleEl = document.querySelector(".bubble-container");
+    const zzzEl = document.querySelector(".zzz");
+
+    let t = Infinity, l = Infinity, r = -Infinity, b = -Infinity;
+
+    // Pet SVG container
+    const pr = petEl?.getBoundingClientRect();
+    if (pr && pr.width && pr.height) {
+      t = Math.min(t, pr.top);
+      l = Math.min(l, pr.left);
+      r = Math.max(r, pr.right);
+      b = Math.max(b, pr.bottom);
+    }
+
+    // Bubble (always in layout)
+    const br = bubbleEl?.getBoundingClientRect();
+    if (br && br.width && br.height) {
+      t = Math.min(t, br.top);
+      l = Math.min(l, br.left);
+      r = Math.max(r, br.right);
+    }
+
+    // ZZZ when visible
+    if (zzzEl?.classList.contains("visible")) {
+      const zr = zzzEl.getBoundingClientRect();
+      t = Math.min(t, zr.top);
+      l = Math.min(l, zr.left);
+      r = Math.max(r, zr.right);
+      b = Math.max(b, zr.bottom);
+    }
+
+    if (!Number.isFinite(t)) return;
+
+    const petRegion = {
+      x: Math.max(0, Math.round(l - padding)),
+      y: Math.max(0, Math.round(t - padding)),
+      width: Math.round(r - l + padding * 2),
+      height: Math.round(b - t + padding * 2)
+    };
+
+    // Chat area (bottom: input box + quick actions)
+    const chatBox = document.querySelector(".chat-box");
+    const actions = document.querySelector(".quick-actions");
+    const cr = chatBox?.getBoundingClientRect();
+    const ar = actions?.getBoundingClientRect();
+
+    if (cr && ar) {
+      const ct = Math.min(cr.top, ar.top);
+      const cb = Math.max(cr.bottom, ar.bottom);
+      const chatRegion = {
+        x: 0,
+        y: Math.round(ct - padding),
+        width: 280,
+        height: Math.round(cb - ct + padding * 2)
+      };
+
+      if (window.electronAPI?.setShape) {
+        window.electronAPI.setShape([petRegion, chatRegion]);
+      }
+    }
+  });
+}

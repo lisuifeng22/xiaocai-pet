@@ -78,6 +78,13 @@ ipcMain.on("close-window", () => {
   if (win) win.close();
 });
 
+ipcMain.on("set-window-shape", (_, regions) => {
+  if (!win) return;
+  try {
+    win.setShape(regions);
+  } catch (_) {}
+});
+
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {

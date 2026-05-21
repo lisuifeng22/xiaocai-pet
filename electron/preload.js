@@ -12,5 +12,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   dragWindowEnd: () =>
     ipcRenderer.send("drag-window-end"),
 
-  closeWindow: () => ipcRenderer.send("close-window")
+  closeWindow: () => ipcRenderer.send("close-window"),
+
+  setShape: (regions) => ipcRenderer.send("set-window-shape", regions)
 });
