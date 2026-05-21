@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
 
 let win;
+let dragState = null;
 
 function createWindow() {
   win = new BrowserWindow({
@@ -24,16 +25,53 @@ function createWindow() {
   win.setAlwaysOnTop(true, "screen-saver");
 }
 
-ipcMain.on("drag-window", (_, { deltaX, deltaY, petOffset }) => {
-  if (!win || typeof petOffset !== "number") return;
+ipcMain.on("drag-window-start", (_, { mouseX, mouseY, petOffset }) => {
+  if (!win || !Number.isFinite(mouseX) || !Number.isFinite(mouseY)) return;
+
   try {
     const [x, y] = win.getPosition();
-    const [w, h] = win.getSize();
-    const display = screen.getDisplayNearestPoint({ x: x + w / 2, y: y + h / 2 });
-    const topBound = display.bounds.y - petOffset;
-    const bottomBound = display.workArea.y + display.workArea.height - h;
-    win.setPosition(x + deltaX, Math.max(topBound, Math.min(bottomBound, y + deltaY)));
+
+    dragState = {
+      startMouseX: Math.round(mouseX),
+      startMouseY: Math.round(mouseY),
+      startWinX: x,
+      startWinY: y,
+      petOffset: Number.isFinite(petOffset) ? Math.round(petOffset) : 0,
+      lastX: x,
+      lastY: y
+    };
   } catch (_) {}
+});
+
+ipcMain.on("drag-window-move", (_, { mouseX, mouseY }) => {
+  if (!win || !dragState || !Number.isFinite(mouseX) || !Number.isFinite(mouseY)) return;
+
+  try {
+    const [w, h] = win.getSize();
+
+    const nextX = dragState.startWinX + Math.round(mouseX - dragState.startMouseX);
+    const nextY = dragState.startWinY + Math.round(mouseY - dragState.startMouseY);
+
+    const display = screen.getDisplayNearestPoint({
+      x: nextX + w / 2,
+      y: nextY + h / 2
+    });
+
+    const topBound = display.bounds.y - dragState.petOffset;
+    const bottomBound = display.workArea.y + display.workArea.height - h;
+    const clampedY = Math.max(topBound, Math.min(bottomBound, nextY));
+
+    if (nextX === dragState.lastX && clampedY === dragState.lastY) return;
+
+    dragState.lastX = nextX;
+    dragState.lastY = clampedY;
+
+    win.setPosition(nextX, clampedY);
+  } catch (_) {}
+});
+
+ipcMain.on("drag-window-end", () => {
+  dragState = null;
 });
 
 ipcMain.on("close-window", () => {

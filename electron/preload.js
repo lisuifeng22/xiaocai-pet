@@ -2,6 +2,15 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
   platform: process.platform,
-  dragWindow: (deltaX, deltaY, petOffset) => ipcRenderer.send("drag-window", { deltaX, deltaY, petOffset }),
+
+  dragWindowStart: (mouseX, mouseY, petOffset) =>
+    ipcRenderer.send("drag-window-start", { mouseX, mouseY, petOffset }),
+
+  dragWindowMove: (mouseX, mouseY) =>
+    ipcRenderer.send("drag-window-move", { mouseX, mouseY }),
+
+  dragWindowEnd: () =>
+    ipcRenderer.send("drag-window-end"),
+
   closeWindow: () => ipcRenderer.send("close-window")
 });

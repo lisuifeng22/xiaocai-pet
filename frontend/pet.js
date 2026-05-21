@@ -4,7 +4,6 @@ const bubble = document.getElementById("bubble");
 const userInput = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 const ctxMenu = document.getElementById("contextMenu");
-
 const BACKEND_URL = "http://127.0.0.1:5000";
 
 // ===== State Machine =====
@@ -13,9 +12,15 @@ let idleTimer = null;
 let sleepTimer = null;
 let bubbleTimer = null;
 let isDragging = false;
-let dragStartX = 0, dragStartY = 0;
+let dragStartX = 0;
+let dragStartY = 0;
 let dragPetOffset = 0;
 let wasDragged = false;
+
+// Drag throttling: avoid high-frequency IPC + setPosition jitter.
+let dragRaf = null;
+let latestDragScreenX = 0;
+let latestDragScreenY = 0;
 
 const BUBBLE_PHRASES = [
   "你终于来了？也太慢了吧。",
@@ -32,11 +37,9 @@ fetch("./assets/pet.svg")
   .then(svgContent => {
     svgWrap.innerHTML = svgContent;
     svgWrap.classList.add("state-idle");
-    // Ensure the svg element inside the wrapper matches
     startIdleTimer();
   })
   .catch(() => {
-    // Fallback if SVG fails to load
     svgWrap.textContent = "(>_<)";
     svgWrap.style.fontSize = "80px";
     svgWrap.style.textAlign = "center";
@@ -51,14 +54,12 @@ function setPetState(state) {
   svgWrap.classList.add("state-" + state);
   currentState = state;
 
-  // ZZZ indicator visibility
   document.querySelector(".zzz").classList.toggle("visible", state === "sleep");
 
   if (state === "sleep") {
     showBubble("Zzz...");
   }
 
-  // Reset idle timer on interaction
   if (state !== "walk" && state !== "sleep") {
     resetIdleTimer();
   }
@@ -73,12 +74,10 @@ function resetIdleTimer() {
   clearTimeout(idleTimer);
   clearTimeout(sleepTimer);
 
-  // If was sleeping, wake up
   if (currentState === "sleep") {
     setPetState("idle");
   }
 
-  // After 45s idle → sleep
   sleepTimer = setTimeout(() => {
     if (currentState === "idle") {
       setPetState("sleep");
@@ -90,6 +89,7 @@ function resetIdleTimer() {
 function showBubble(text) {
   bubble.textContent = text;
   bubble.classList.add("show");
+
   clearTimeout(bubbleTimer);
   bubbleTimer = setTimeout(() => {
     bubble.classList.remove("show");
@@ -104,55 +104,98 @@ function showRandomBubble() {
 // ===== Drag System =====
 svgWrap.addEventListener("mousedown", (e) => {
   if (e.button !== 0) return;
+
+  e.preventDefault();
+
   isDragging = true;
   wasDragged = false;
-  dragStartX = e.clientX;
-  dragStartY = e.clientY;
+
+  // Use screen coordinates. clientX/clientY changes when the Electron window moves.
+  dragStartX = e.screenX;
+  dragStartY = e.screenY;
+  latestDragScreenX = e.screenX;
+  latestDragScreenY = e.screenY;
+
   dragPetOffset = Math.round(svgWrap.getBoundingClientRect().top);
-  svgWrap.classList.add("state-walk");
+
+  clearTimeout(idleTimer);
+  clearTimeout(sleepTimer);
+
+  document.body.classList.add("is-dragging");
+  setPetState("walk");
+
+  if (window.electronAPI?.dragWindowStart) {
+    window.electronAPI.dragWindowStart(e.screenX, e.screenY, dragPetOffset);
+  }
 });
 
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
-  wasDragged = true;
-  const dx = e.clientX - dragStartX;
-  const dy = e.clientY - dragStartY;
-  dragStartX = e.clientX;
-  dragStartY = e.clientY;
 
-  if (window.electronAPI?.dragWindow) {
-    window.electronAPI.dragWindow(dx, dy, dragPetOffset);
+  e.preventDefault();
+
+  latestDragScreenX = e.screenX;
+  latestDragScreenY = e.screenY;
+
+  if (Math.abs(e.screenX - dragStartX) > 3 || Math.abs(e.screenY - dragStartY) > 3) {
+    wasDragged = true;
   }
+
+  if (dragRaf) return;
+
+  dragRaf = requestAnimationFrame(() => {
+    dragRaf = null;
+
+    if (window.electronAPI?.dragWindowMove) {
+      window.electronAPI.dragWindowMove(latestDragScreenX, latestDragScreenY);
+    }
+  });
 });
 
-document.addEventListener("mouseup", () => {
-  if (isDragging) {
-    isDragging = false;
-    svgWrap.classList.remove("state-walk");
-  }
-});
+function finishDrag() {
+  if (!isDragging) return;
 
-// ===== Click → Reaction =====
+  isDragging = false;
+
+  if (dragRaf) {
+    cancelAnimationFrame(dragRaf);
+    dragRaf = null;
+  }
+
+  document.body.classList.remove("is-dragging");
+
+  if (window.electronAPI?.dragWindowEnd) {
+    window.electronAPI.dragWindowEnd();
+  }
+
+  setPetState("idle");
+}
+
+document.addEventListener("mouseup", finishDrag);
+window.addEventListener("blur", finishDrag);
+
+// ===== Click -> Reaction =====
 svgWrap.addEventListener("click", (e) => {
   if (isDragging || wasDragged) {
     wasDragged = false;
     return;
   }
+
   setPetState("happy");
   showRandomBubble();
-  // Revert to idle after happy animation finishes (4 cycles * 0.6s)
+
   clearTimeout(idleTimer);
   idleTimer = setTimeout(() => setPetState("idle"), 2500);
-  // Prevent sleep timer race
   clearTimeout(sleepTimer);
 });
 
 // ===== Right-Click Context Menu =====
 svgWrap.addEventListener("contextmenu", (e) => {
   e.preventDefault();
-  // Position menu within window bounds
+
   const mx = Math.min(e.clientX, window.innerWidth - 140);
   const my = Math.min(e.clientY, window.innerHeight - 220);
+
   ctxMenu.style.left = mx + "px";
   ctxMenu.style.top = my + "px";
   ctxMenu.classList.add("show");
@@ -168,6 +211,7 @@ document.addEventListener("click", (e) => {
 ctxMenu.addEventListener("click", (e) => {
   const item = e.target.closest(".menu-item");
   if (!item) return;
+
   const action = item.dataset.action;
   ctxMenu.classList.remove("show");
 
@@ -178,15 +222,18 @@ ctxMenu.addEventListener("click", (e) => {
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => setPetState("idle"), 2500);
       break;
+
     case "talk":
       showRandomBubble();
       setPetState("talking");
       clearTimeout(idleTimer);
       idleTimer = setTimeout(() => setPetState("idle"), 2000);
       break;
+
     case "settings":
       showBubble("设置还没做好，别催。");
       break;
+
     case "quit":
       if (window.electronAPI?.closeWindow) {
         window.electronAPI.closeWindow();
@@ -237,14 +284,14 @@ userInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") sendMessage();
 });
 
-// ===== Pomodoro (exposed for HTML onclick) =====
+// ===== Pomodoro exposed for HTML onclick =====
 let pomodoroTimer = null;
-
 window.startPomodoro = function (minutes) {
   if (pomodoroTimer) clearTimeout(pomodoroTimer);
 
   showBubble(`行，我盯你 ${minutes} 分钟。别摸鱼。`);
   setPetState("talking");
+
   clearTimeout(idleTimer);
   idleTimer = setTimeout(() => setPetState("idle"), 2000);
 
@@ -259,7 +306,6 @@ window.startPomodoro = function (minutes) {
 
 // ===== Keyboard shortcut to show bubble =====
 document.addEventListener("keydown", (e) => {
-  // Alt+R = random bubble
   if (e.altKey && e.key === "r") {
     e.preventDefault();
     showRandomBubble();
@@ -273,8 +319,12 @@ document.addEventListener("keydown", (e) => {
 document.addEventListener("mousemove", (e) => {
   if (currentState === "sleep" && !isDragging) {
     const rect = svgWrap.getBoundingClientRect();
-    if (e.clientX >= rect.left - 30 && e.clientX <= rect.right + 30 &&
-        e.clientY >= rect.top - 30 && e.clientY <= rect.bottom + 30) {
+    if (
+      e.clientX >= rect.left - 30 &&
+      e.clientX <= rect.right + 30 &&
+      e.clientY >= rect.top - 30 &&
+      e.clientY <= rect.bottom + 30
+    ) {
       setPetState("idle");
     }
   }

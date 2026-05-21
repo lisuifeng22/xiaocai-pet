@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -23,6 +24,7 @@ html, body {
   cursor: grab;
   position: relative;
 }
+
 .pet-container:active {
   cursor: grabbing;
 }
@@ -36,14 +38,16 @@ html, body {
   min-height: 230px;
   flex-shrink: 1;
 }
-#svgWrap svg { opacity: 1;
+
+#svgWrap svg {
+  opacity: 1;
   width: 120px;
   min-height: 144px;
   transform-origin: center bottom;
+  will-change: transform;
 }
 
 /* ========== SVG Expression Toggles ========== */
-/* Hide all expression groups by default */
 #svgWrap .eye-group,
 #svgWrap .mouth-group,
 #svgWrap .brow-happy,
@@ -94,60 +98,120 @@ html, body {
 
 /* ========== CSS Animations ========== */
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-4px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
+
 #svgWrap.state-idle svg {
   animation: float 3s ease-in-out infinite;
 }
 
 @keyframes talk {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-2px) rotate(-2deg); }
-  75%      { transform: translateY(-1px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-1px) rotate(2deg);
+  }
 }
+
 #svgWrap.state-talking svg {
   animation: talk 0.4s ease-in-out infinite;
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  20%      { transform: translateY(-12px) rotate(-3deg); }
-  40%      { transform: translateY(0) rotate(3deg); }
-  60%      { transform: translateY(-6px) rotate(-2deg); }
-  80%      { transform: translateY(-2px) rotate(1deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  20% {
+    transform: translateY(-12px) rotate(-3deg);
+  }
+  40% {
+    transform: translateY(0) rotate(3deg);
+  }
+  60% {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(-2px) rotate(1deg);
+  }
 }
+
 #svgWrap.state-happy svg {
   animation: bounce 0.6s ease-in-out 4;
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%      { transform: translateX(-5px); }
-  40%      { transform: translateX(5px); }
-  60%      { transform: translateX(-4px); }
-  80%      { transform: translateX(4px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(4px);
+  }
 }
+
 #svgWrap.state-angry svg {
   animation: shake 0.3s ease-in-out infinite;
 }
 
 @keyframes sway {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-2px) rotate(-2deg); }
-  75%      { transform: translateY(-1px) rotate(2deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-2px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-1px) rotate(2deg);
+  }
 }
+
 #svgWrap.state-sleep svg {
   animation: sway 4s ease-in-out infinite;
   opacity: 1;
 }
 
 @keyframes walkPulse {
-  0%, 100% { opacity: 1; }
-  50%      { opacity: 0.9; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.9;
+  }
 }
+
 #svgWrap.state-walk svg {
-  /* Static during drag — no transform animation to avoid repaint jitter */
+  /* Static during drag: stop transform animation to avoid repaint jitter. */
+  animation: none !important;
+  transform: translateY(0) rotate(0deg) !important;
+  opacity: 1;
+}
+
+body.is-dragging,
+body.is-dragging * {
+  cursor: grabbing !important;
 }
 
 /* ========== Speech Bubble ========== */
@@ -155,6 +219,7 @@ html, body {
   position: relative;
   margin-bottom: 2px;
 }
+
 .bubble {
   max-width: 240px;
   padding: 10px 16px;
@@ -170,10 +235,11 @@ html, body {
   transition: opacity 0.25s ease;
   position: relative;
 }
+
 .bubble.show {
   opacity: 1;
 }
-/* Bubble tail */
+
 .bubble::after {
   content: '';
   position: absolute;
@@ -200,13 +266,22 @@ html, body {
   font-weight: bold;
   letter-spacing: 2px;
 }
+
 .zzz.visible {
   opacity: 1;
   animation: zzzFade 2.5s ease-in-out infinite;
 }
+
 @keyframes zzzFade {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
-  50%      { transform: translateY(-10px) scale(1.2); opacity: 1; }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-10px) scale(1.2);
+    opacity: 1;
+  }
 }
 
 /* ========== Chat Box ========== */
@@ -215,6 +290,7 @@ html, body {
   gap: 6px;
   padding: 4px 8px 6px;
 }
+
 .chat-box input {
   flex: none;
   width: calc(100% - 56px);
@@ -227,9 +303,11 @@ html, body {
   background: rgba(255, 255, 255, 0.85);
   transition: border-color 0.2s;
 }
+
 .chat-box input:focus {
   border-color: rgba(140, 180, 255, 0.6);
 }
+
 .chat-box button {
   flex: none;
   width: 50px;
@@ -244,6 +322,7 @@ html, body {
   transition: background 0.2s;
   white-space: nowrap;
 }
+
 .quick-actions button {
   border: none;
   border-radius: 10px;
@@ -255,6 +334,7 @@ html, body {
   transition: background 0.2s;
   white-space: nowrap;
 }
+
 .chat-box button:hover,
 .quick-actions button:hover {
   background: rgba(200, 220, 255, 0.85);
@@ -281,10 +361,12 @@ html, body {
   transition: opacity 0.15s;
   z-index: 1000;
 }
+
 .context-menu.show {
   opacity: 1;
   pointer-events: auto;
 }
+
 .context-menu .menu-item {
   padding: 7px 16px;
   font-size: 13px;
@@ -293,9 +375,11 @@ html, body {
   transition: background 0.15s;
   white-space: nowrap;
 }
+
 .context-menu .menu-item:hover {
   background: rgba(200, 220, 255, 0.5);
 }
+
 .context-menu .menu-divider {
   height: 1px;
   background: rgba(0, 0, 0, 0.08);
@@ -307,3 +391,48 @@ html, body {
   width: 120px;
   min-height: 144px;
 }
+/* ===== Drag input width HARD LOCK v4 ===== */
+html, body {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  overflow: hidden !important;
+}
+
+.chat-box {
+  width: 280px !important;
+  min-width: 280px !important;
+  max-width: 280px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 4px 8px 6px !important;
+  overflow: hidden !important;
+}
+
+.chat-box input#userInput {
+  flex: 0 0 208px !important;
+  width: 208px !important;
+  min-width: 208px !important;
+  max-width: 208px !important;
+  box-sizing: border-box !important;
+}
+
+.chat-box button#sendBtn {
+  flex: 0 0 50px !important;
+  width: 50px !important;
+  min-width: 50px !important;
+  max-width: 50px !important;
+  box-sizing: border-box !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+body.is-dragging .chat-box,
+body.is-dragging .chat-box input#userInput,
+body.is-dragging .chat-box button#sendBtn {
+  transition: none !important;
+}
+/* ===== End Drag input width HARD LOCK v4 ===== */
