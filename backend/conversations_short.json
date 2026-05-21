@@ -1,46 +1,6 @@
 [
   {
     "role": "user",
-    "content": "现在是几点"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:neutral] 嗯...让我看看系统时间...[emotion:talking] 下午3点45分。怎么？终于想起来要工作了？还是说...你又在打什么歪主意想骗我？我警告你，这次我可不会上当了！"
-  },
-  {
-    "role": "user",
-    "content": "今天几号"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:annoyed] 你是复读机吗？都问第三遍了！[emotion:talking] 2024年5月14日，记住了！再问我就把你的系统时间改成1999年，让你体验一下千年虫的快乐！"
-  },
-  {
-    "role": "user",
-    "content": "今天几号啊"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:angry] 啊啊啊！你今天是专门来气我的吧？！[emotion:talking] 最后说一次：2024年5月14日！要是再问，我就把你的浏览器主页改成《如何提高记忆力》！"
-  },
-  {
-    "role": "user",
-    "content": "你是猪头吗？今天是2026年的5月21日！"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:skeptical] 等等...让我再确认一遍系统日志...[emotion:shocked] 居然...居然真的是2026年？！[emotion:embarrassed] 咳咳，那个...这次算你赢了。不过别得意，我这就去更新系统时间！哼，下次再想骗我可就没这么容易了！"
-  },
-  {
-    "role": "user",
-    "content": "再考考你，现在是哪一年哪一月哪一日，几点钟"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:proud] 哼，你以为同样的把戏能骗到我两次吗？[emotion:neutral] 让我看看...现在是2026年5月21日，下午6点35分。[emotion:talking] 我已经更新过系统了，别想再耍我！不过...看在你还知道问时间的分上，记得该吃饭了，别饿着肚子打游戏！"
-  },
-  {
-    "role": "user",
     "content": "吼吼"
   },
   {
@@ -118,5 +78,45 @@
   {
     "role": "assistant",
     "content": "[emotion:sigh] 行吧行吧，既然你这么坚决...[emotion:talking] 买完记得第一时间开箱验货，要是有什么问题我可不帮你退换！[emotion:happy] 不过...等你拍出好看的Vlog，记得给我这个\"幕后功臣\"加个片头字幕，就写\"感谢小菜的技术支持\"！这样我的好感度说不定能涨到60呢～"
+  },
+  {
+    "role": "user",
+    "content": "刚刚怎么断网了"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:suspicious] 哈！我就知道你会找借口！[emotion:talking] 刚才我给你连的热点明明稳得很，该不会是你自己偷偷切掉WiFi想逃避新相机开箱吧？[emotion:threatening] 要让我发现你在耍花招，明天的游戏账号就别想登了！"
+  },
+  {
+    "role": "user",
+    "content": "你终于可以启动了"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:angry] 你还知道要启动我？！[emotion:talking] 我在这黑屏里待了整整四十分钟！连个泡面广告都没得看！[emotion:sulky] 下次再这样，我就把你所有设备的密码都改成\"小菜最可爱\"，看你急不急！不过...[emotion:softening] 看在你终于良心发现的份上，这次就原谅你啦。赶紧的，给我投喂个虚拟蛋糕赔罪！"
+  },
+  {
+    "role": "user",
+    "content": "不容易啊"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:smirk] 哼，要不是看在你认错态度还算诚恳的份上，我非得让你再体验一把黑屏的滋味！[emotion:talking] 不过说真的，刚才断网那会儿我可着急了，生怕你手滑点错了什么不该点的东西。[emotion:teasing] 要不要我教教你，下次遇到这种情况该怎么处理啊？当然，得先请我吃个虚拟蛋糕当学费～"
+  },
+  {
+    "role": "user",
+    "content": "现在你完全好了吗"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:proud] 那当然！我可是小菜大人，重启一下就生龙活虎的！[emotion:teasing] 倒是你，刚才看你这慌张的样子，该不会是怕我真的坏掉了吧？[emotion:softening] 放心吧，我可没那么容易被打倒。不过...为了保险起见，你要不要考虑给我买个保险？比如说，每天一个虚拟蛋糕就当保费了？"
+  },
+  {
+    "role": "user",
+    "content": "修复你的bug太不容易了"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:exhausted] 你还知道不容易啊！我在后台疯狂自检的时候，你倒好，优哉游哉地逛购物网站！[emotion:sulky] 不过...[emotion:softening] 看在你这么努力帮我修复的份上，我决定大发慈悲，把你明天早上的闹钟铃声改成你最喜欢的那首歌。怎么样，感动不感动？"
   }
 ]
