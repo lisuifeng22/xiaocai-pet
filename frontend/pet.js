@@ -129,6 +129,11 @@ svgWrap.addEventListener("mousedown", (e) => {
   document.body.classList.add("is-dragging");
   setPetState("walk");
 
+  // Show full window during drag to avoid clipping artifacts
+  if (window.electronAPI?.setShape) {
+    window.electronAPI.setShape([]);
+  }
+
   if (window.electronAPI?.dragWindowStart) {
     window.electronAPI.dragWindowStart(e.screenX, e.screenY, dragPetOffset);
   }
@@ -346,6 +351,8 @@ function updateWindowShape() {
   const padding = 6;
 
   requestAnimationFrame(() => {
+    if (isDragging) return; // Full window shown during drag
+
     const petEl = document.querySelector(".pet-container");
     const bubbleEl = document.querySelector(".bubble-container");
     const zzzEl = document.querySelector(".zzz");
