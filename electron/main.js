@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const path = require("path");
+const { exec } = require("child_process");
 
 let win;
 let dragState = null;
@@ -23,6 +24,10 @@ function createWindow() {
 
   win.loadFile(path.join(__dirname, "../frontend/index.html"));
   win.setAlwaysOnTop(true, "screen-saver");
+
+  win.on("closed", () => {
+    exec("taskkill /F /IM python.exe", () => {});
+  });
 }
 
 ipcMain.on("drag-window-start", (_, { mouseX, mouseY, petOffset }) => {
@@ -75,6 +80,7 @@ ipcMain.on("drag-window-end", () => {
 });
 
 ipcMain.on("close-window", () => {
+  exec("taskkill /F /IM python.exe", () => {});
   if (win) win.close();
 });
 
