@@ -160,8 +160,9 @@ def build_system_prompt(memory: dict) -> str:
         f"用户是你的主人「{username}」，你和主人的关系：{closeness}（好感度{favor}）。"
         "回复要求：\n"
         "1. 口语化，生动有趣，符合性格设定\n"
-        "2. **回复必须以 [emotion:xxx] 开头**，标记当前情绪\n"
-        "3. 示例：[emotion:talking] 哼，你还知道来找我？"
+        "2. 适当使用 emoji 表达情绪，让回复更生动（如 😏 😡 🥺 ✨ 🎉 💤 🤔 💪 👀 ❤️）\n"
+        "3. **回复必须以 [emotion:xxx] 开头**，标记当前情绪\n"
+        "4. 示例：[emotion:talking] 哼，你还知道来找我？😏"
     )
 
     # 注入长期记忆
@@ -189,7 +190,8 @@ def parse_emotion(text: str) -> str:
 
 def strip_emotion_prefix(text: str) -> str:
     import re
-    return re.sub(r"^\[emotion:[^\]]+\]\s*", "", text).strip()
+    # 去掉开头和中间所有的 [emotion:xxx] 标签
+    return re.sub(r"\[emotion:[^\]]+\]\s*", "", text).strip()
 
 
 def call_llm(messages: list[dict]) -> str | None:

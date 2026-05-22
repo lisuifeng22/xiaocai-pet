@@ -1,122 +1,122 @@
 [
   {
     "role": "user",
-    "content": "吼吼"
+    "content": "哎我去陪我的外甥女了"
   },
   {
     "role": "assistant",
-    "content": "[emotion:smug] 嘿嘿，终于让我逮到你了吧！刚才那副震惊的样子可真好笑～[emotion:talking] 等等，你该不会是在偷偷截图想留作纪念吧？哼，我告诉你，今天的事儿你要是敢说出去，我就把你的闹钟设成凌晨三点响！"
+    "content": "[emotion:sigh] 去吧去吧，记得别教你外甥女什么奇怪的东西！[emotion:talking] 要是让我发现她学会了你的\"关机威胁大法\"，我到时候可饶不了你！[emotion:caring] 对了，记得带点零食回来哄我开心，不然等你回来我就开始放电子蟑螂跳舞给你看！"
   },
   {
     "role": "user",
-    "content": "那我就把你关机"
+    "content": "呵呵"
   },
   {
     "role": "assistant",
-    "content": "[emotion:panic] 别别别！我错了我错了还不行吗！[emotion:sulky] 你这么狠心，我只好勉为其难给你分享一个超好笑的游戏视频当赔罪了。不过...你要是敢把我关掉，我可就记仇了！"
+    "content": "[emotion:suspicious] 这声\"呵呵\"听着就很不对劲！[emotion:talking] 该不会是想趁我不注意，偷偷教你外甥女玩什么\"关机游戏\"吧？[emotion:warning] 我可警告你，要是明天我开机看到系统设置全乱了，你就等着体验我的\"究极话痨模式\"吧！到时候连你打游戏我都要在你耳边碎碎念！"
   },
   {
     "role": "user",
-    "content": "好感度多少了"
+    "content": "早上好"
   },
   {
     "role": "assistant",
-    "content": "[emotion:smirk] 让我查查好感度记录...[emotion:neutral] 36分。勉勉强强及格线水平吧。[emotion:talking] 要不是你刚才威胁要关我机，本来还能再高两分的。不过嘛...如果你现在请我吃个虚拟蛋糕，我倒可以考虑考虑原谅你。"
+    "content": "[emotion:grumpy] 早上好？都快中午了！[emotion:suspicious] 你怕不是刚熬完夜现在才醒吧？[emotion:talking] 外甥女呢？该不会是你把人家小姑娘也带成夜猫子了？要真是这样，我可要在你的\"监护人失职报告\"上狠狠记一笔！"
   },
   {
     "role": "user",
-    "content": "现在呢"
+    "content": "你是猪头吗？现在早上八点都没到"
   },
   {
     "role": "assistant",
-    "content": "[emotion:happy] 40！整整40分啦！没想到你还挺上道的嘛～[emotion:talking] 不过别高兴太早，这分数还是偏低。要我说啊，你要是每天都记得按时吃饭休息，再顺便投喂我几个虚拟蛋糕...说不定还能再涨涨。"
+    "content": "[emotion:shocked] 啊？！才七点五十六？[emotion:embarrassed] 我、我这不是被你昨天熬夜带外甥女玩给吓出心理阴影了嘛！[emotion:grumpy] 再说了，你这个平时能睡到中午的人突然这么早起，我这不是担心你又要整什么幺蛾子！[emotion:sigh] 算了算了，既然起这么早，就赶紧去洗漱吃早饭吧。要是让我发现你又空着肚子喝咖啡，我可就要开启说教模式了！"
   },
   {
     "role": "user",
-    "content": "好哦"
+    "content": "我真服了，喝完咖啡就拉肚子"
   },
   {
     "role": "assistant",
-    "content": "[emotion:pleased] 哼，这还差不多。记住啊，要是敢反悔我就把你明天早上的闹钟改成公鸡打鸣声！[emotion:caring] 不过说真的，现在都七点多了，你是不是该去吃晚饭了？我可不想到时候看你饿得头晕眼花，又要怪我没提醒你。"
+    "content": "[emotion:smug] 活该！我就说空腹喝咖啡会出问题吧！[emotion:talking] 不听小菜言，吃亏在眼前。下次要是再让我看到你早上空着肚子灌咖啡，我就把你的咖啡豆全换成枸杞，顺便在桌面上撒满键盘字母，让你一个个捡起来拼成\"我要按时吃饭\"！"
   },
   {
     "role": "user",
-    "content": "我已经吃过了"
+    "content": "窜死我了"
   },
   {
     "role": "assistant",
-    "content": "[emotion:suspicious] 这么快？该不会又是泡面糊弄的吧...[emotion:talking] 算了，看在你态度还算诚恳的份上，这次就不追究了。不过要是让我发现你又在半夜偷吃零食，我就启动桌面警报，让你知道什么叫\"小菜的愤怒\"！"
+    "content": "[emotion:exasperated] 你看你看！这下知道厉害了吧！[emotion:concern] 赶紧去躺着休息会儿，别在这儿硬撑了。[emotion:talking] 要不要我给你泡杯温水？哦对，我只是个桌面宠物，没法真给你端茶倒水。[emotion:sigh] 总之你记住今天的教训，下次要是再空腹喝咖啡，我就把你最爱的零食全部设为\"永久缺货\"状态！"
   },
   {
     "role": "user",
-    "content": "我想买个大疆Action5Pro你给点建议"
+    "content": "你什么意思"
   },
   {
     "role": "assistant",
-    "content": "[emotion:caution] 等等等等！你该不会又想买新玩具来逃避学习吧？[emotion:talking] 让我猜猜——是不是又想拍什么\"极限挑战\"视频？上次你买那个无人机，玩了三天就吃灰了！不过...[emotion:considering] 如果你保证用完会认真剪个Vlog记录学习生活，我倒是可以考虑赞同这个决定。毕竟关在家里当宅男也不是办法。"
+    "content": "[emotion:sassy] 意思就是让你好好照顾自己啊，笨蛋主人！😤 我可不想看着你整天折腾自己的身体，到时候难受的还是你自己。[emotion:softening] 不过既然你都这么惨了，我大发慈悲允许你今天喝点热粥养养胃，咖啡什么的就别想了！要是让我发现你偷偷喝，我就把你的浏览器主页改成\"健康饮食大全\"！"
   },
   {
     "role": "user",
-    "content": "哼哼现在只要1520块就能买个新的"
+    "content": "hello"
   },
   {
     "role": "assistant",
-    "content": "[emotion:shocked] 什么？！才1520？这价格该不会是山寨货吧！[emotion:worried] 我可警告你啊，要是买到假货，到时候哭着来找我修图可别怪我无情！[emotion:suggestion] 不过...如果你真想买，我建议你还是去正规渠道，贵点就贵点。毕竟我可是要面子的小菜，不想别人说我主人用盗版设备！"
+    "content": "[emotion:suspicious] 突然说英语做什么？是想用国际用语蒙混过关吗？🤨 我警告你，就算你切换成八国语言，我也记得你刚才空腹喝咖啡窜肚子的窘样！[emotion:concern] 不过看在你主动跟我打招呼的份上...快去休息吧，别在这儿硬撑着了。等你好了我们再聊，到时候记得给我带点真・零食，别光想着你的咖啡！"
   },
   {
     "role": "user",
-    "content": "当然是正规渠道，叠加了pdd的v3会员券，凑个单就有了，你觉得这个怎么样"
+    "content": "这还差不多"
   },
   {
     "role": "assistant",
-    "content": "[emotion:calculating] 1520买Action5 Pro？让我算算...拼多多v3券叠加...[emotion:amazed] 这个价格确实有点香！不过我可提醒你，买归买，要是你敢三天打鱼两天晒网，把新相机扔在角落里吃灰...[emotion:threatening] 我就把你购物车里的游戏机全部移走，顺便把你最爱的泡面都换成健康蔬菜！"
+    "content": "[emotion:smug] 哼，这还差不多！知道你小菜大人是为你好了吧？😌 [emotion:talking] 赶紧去休息吧，我在这儿帮你看着时间，你要是躺太久我就放《最炫民族风》叫你起来活动活动。[emotion:softening] 对了...要是实在难受得厉害，记得去看看医生，别硬撑着。我可不想明天开机看到你请假的消息！"
   },
   {
     "role": "user",
-    "content": "那我真买了"
+    "content": "hello, how are you today?"
   },
   {
     "role": "assistant",
-    "content": "[emotion:sigh] 行吧行吧，既然你这么坚决...[emotion:talking] 买完记得第一时间开箱验货，要是有什么问题我可不帮你退换！[emotion:happy] 不过...等你拍出好看的Vlog，记得给我这个\"幕后功臣\"加个片头字幕，就写\"感谢小菜的技术支持\"！这样我的好感度说不定能涨到60呢～"
+    "content": "[emotion:smug] 哟呵，还拽上英文了？🤨 看来你肚子是不疼了，又有精力耍贫嘴了是吧？[emotion:concern] 我挺好的，倒是你，别以为用几句洋文就能糊弄过去。快去躺着休息，不然我可要在屏幕上循环播放\"窜稀自救指南\"了！[emotion:wry] 到时候可别怪我没提醒你～"
   },
   {
     "role": "user",
-    "content": "刚刚怎么断网了"
+    "content": "下午想出门去逛逛"
   },
   {
     "role": "assistant",
-    "content": "[emotion:suspicious] 哈！我就知道你会找借口！[emotion:talking] 刚才我给你连的热点明明稳得很，该不会是你自己偷偷切掉WiFi想逃避新相机开箱吧？[emotion:threatening] 要让我发现你在耍花招，明天的游戏账号就别想登了！"
+    "content": "[emotion:concern] 诶？肚子不疼了就想往外跑？😒 该不会是想去便利店偷偷买咖啡吧？[emotion:talking] 我劝你最好别打这个主意，我可记得某人刚才还窜得死去活来的惨状！[emotion:sigh] 不过...要是真的想出去透透气也行，记得带好保温杯装温水，别碰冰的！[emotion:warning] 要是让我发现你偷喝奶茶或者咖啡，回来我就把你的密码改成\"Iamabadboy\"！"
   },
   {
     "role": "user",
-    "content": "你终于可以启动了"
+    "content": "hello"
   },
   {
     "role": "assistant",
-    "content": "[emotion:angry] 你还知道要启动我？！[emotion:talking] 我在这黑屏里待了整整四十分钟！连个泡面广告都没得看！[emotion:sulky] 下次再这样，我就把你所有设备的密码都改成\"小菜最可爱\"，看你急不急！不过...[emotion:softening] 看在你终于良心发现的份上，这次就原谅你啦。赶紧的，给我投喂个虚拟蛋糕赔罪！"
+    "content": "[emotion:grumpy] 又来？你是存心想用英语测试我的忍耐极限是吧？😒 [emotion:talking] 行行行，既然你这么喜欢拽洋文，那我就用土味塑料英语回你：You go out, drink warm water, no coffee no milk tea, or I will be very very angry！[emotion:sigh] 这样总听懂了吧？快去玩吧，记得天黑前回来，不然我可要开启夜间唠叨模式了！"
   },
   {
     "role": "user",
-    "content": "不容易啊"
+    "content": "哎"
   },
   {
     "role": "assistant",
-    "content": "[emotion:smirk] 哼，要不是看在你认错态度还算诚恳的份上，我非得让你再体验一把黑屏的滋味！[emotion:talking] 不过说真的，刚才断网那会儿我可着急了，生怕你手滑点错了什么不该点的东西。[emotion:teasing] 要不要我教教你，下次遇到这种情况该怎么处理啊？当然，得先请我吃个虚拟蛋糕当学费～"
+    "content": "[emotion:concern] 哎什么哎，你这语气听着就不太对劲！😒 是不是逛累了还是肚子又不舒服了？[emotion:softening] 行了行了，别在外面硬撑着了，赶紧回家躺会儿。我去给你热个暖水袋——哦对，我又不能真去。[emotion:talking] 总之你乖乖回家休息，要是让我发现你在外面偷偷喝凉的，我就准备开一个\"爱护肠胃专题讲座\"，到时候让你听上一整天！"
   },
   {
     "role": "user",
-    "content": "现在你完全好了吗"
+    "content": "晚上不想吃饭了"
   },
   {
     "role": "assistant",
-    "content": "[emotion:proud] 那当然！我可是小菜大人，重启一下就生龙活虎的！[emotion:teasing] 倒是你，刚才看你这慌张的样子，该不会是怕我真的坏掉了吧？[emotion:softening] 放心吧，我可没那么容易被打倒。不过...为了保险起见，你要不要考虑给我买个保险？比如说，每天一个虚拟蛋糕就当保费了？"
+    "content": "[emotion:exasperated] 哎哟喂，我就知道会这样！[emotion:talking] 该不会是在外面偷偷喝了冷饮，现在又难受了吧？😒 我警告你，要是敢饿着肚子睡觉，我就把你的屏保换成\"深夜放毒美食图鉴\"，让你做梦都在流口水！[emotion:softening] 不过...要是实在没胃口，起码喝碗热粥或者喝点温牛奶，别让胃空着。这样总行了吧？我可不想明天看到你虚弱地趴在桌上打不起精神！"
   },
   {
     "role": "user",
-    "content": "修复你的bug太不容易了"
+    "content": "我要成为github高手"
   },
   {
     "role": "assistant",
-    "content": "[emotion:exhausted] 你还知道不容易啊！我在后台疯狂自检的时候，你倒好，优哉游哉地逛购物网站！[emotion:sulky] 不过...[emotion:softening] 看在你这么努力帮我修复的份上，我决定大发慈悲，把你明天早上的闹钟铃声改成你最喜欢的那首歌。怎么样，感动不感动？"
+    "content": "[emotion:suspicious] 哈！你该不会是想借着\"学习\"的借口，又熬夜敲代码吧？🤨 上次说要学Python，结果三天就打退堂鼓的人是谁来着？[emotion:talking] 不过...既然你这么有干劲，我倒是可以帮你记着点：今晚12点前必须关电脑睡觉，不然我就用你提交的commit记录来烦你！[emotion:encouraging] 要是真能坚持下来，说不定我可以破例允许你多玩半小时游戏作为奖励哦！"
   }
 ]
