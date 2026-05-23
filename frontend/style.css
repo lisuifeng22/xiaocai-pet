@@ -443,3 +443,45 @@ body.is-dragging .chat-box button#sendBtn {
   transition: none !important;
 }
 /* ===== End Drag input width HARD LOCK v4 ===== */
+
+/* ===== Opaque pet image patch ===== */
+#svgWrap .pet-img {
+  opacity: 1 !important;
+  width: 120px;
+  height: auto;
+  min-height: 144px;
+  transform-origin: center bottom;
+  will-change: transform;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#svgWrap.state-idle .pet-img {
+  animation: float 3s ease-in-out infinite;
+}
+
+#svgWrap.state-talking .pet-img {
+  animation: talk 0.4s ease-in-out infinite;
+}
+
+#svgWrap.state-happy .pet-img {
+  animation: bounce 0.6s ease-in-out 4;
+}
+
+#svgWrap.state-angry .pet-img {
+  animation: shake 0.3s ease-in-out infinite;
+}
+
+#svgWrap.state-sleep .pet-img {
+  animation: sway 4s ease-in-out infinite;
+  opacity: 1 !important;
+}
+
+#svgWrap.state-walk .pet-img {
+  animation: none !important;
+  transform: translateY(0) rotate(0deg) !important;
+  opacity: 1 !important;
+}
+/* ===== End opaque pet image patch ===== */

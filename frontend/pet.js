@@ -31,24 +31,22 @@ const BUBBLE_PHRASES = [
   "完成了？还不错嘛。"
 ];
 
-// ===== Init: Fetch and inline SVG =====
-fetch("./assets/pet.svg")
-  .then(r => r.text())
-  .then(svgContent => {
-    svgWrap.innerHTML = svgContent;
-    svgWrap.classList.add("state-idle");
-    startIdleTimer();
-    updateWindowShape();
-  })
-  .catch(() => {
-    svgWrap.textContent = "(>_<)";
-    svgWrap.style.fontSize = "80px";
-    svgWrap.style.textAlign = "center";
-    svgWrap.style.paddingTop = "60px";
-    svgWrap.classList.add("state-idle");
-    startIdleTimer();
-    updateWindowShape();
-  });
+// ===== Init: Use opaque PNG pet image =====
+function mountPetImage() {
+  svgWrap.innerHTML = `
+    <img
+      class="pet-img"
+      src="./assets/asuka_opaque_body.png"
+      draggable="false"
+      alt="小菜"
+    />
+  `;
+  svgWrap.classList.add("state-idle");
+  startIdleTimer();
+  updateWindowShape();
+}
+
+mountPetImage();
 
 // ===== State Management =====
 function setPetState(state) {
