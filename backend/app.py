@@ -1,10 +1,16 @@
+# -*- coding: utf-8 -*-
 import json
 import os
-import requests
+import re
+import threading
+import time
+from datetime import datetime
 from pathlib import Path
+
+import requests
+from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -20,12 +26,60 @@ LLM_API_KEY = os.getenv("LLM_API_KEY")
 LLM_API_URL = os.getenv("LLM_API_URL", "https://api.deepseek.com/v1/chat/completions")
 LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-chat")
 
-SHORT_MAX_ROUNDS = 15  # 短期记忆上限（轮数）
-ARCHIVE_BATCH = 5       # 每次归档的轮数
+SHORT_MAX_ROUNDS = 15
+ARCHIVE_BATCH = 5
+
+# ===========================
+# 全局状态 & 主动推送
+# ===========================
+clients = set()
+last_interaction = datetime.now()
+triggered_today = set()
+
+scheduled_events = [
+    {"hour": 8,  "minute": 0, "msg": "早上好，今天也要努力哦~"},
+    {"hour": 12, "minute": 0, "msg": "中午啦，吃饭了吗？"},
+    {"hour": 21, "minute": 0, "msg": "晚安时间到了，该休息啦~"},
+]
+
+INACTIVITY_THRESHOLD = 3600
+CHECK_INTERVAL = 30
 
 
-# ===== 文件读写 =====
+def send_message_to_frontend(msg):
+    print(f"[主动提醒发送] {msg}")
 
+
+def proactive_loop():
+    global triggered_today, last_interaction
+    while True:
+        now = datetime.now()
+        today_key = now.date()
+
+        if not hasattr(proactive_loop, "current_date") or proactive_loop.current_date != today_key:
+            triggered_today = set()
+            proactive_loop.current_date = today_key
+
+        for event in scheduled_events:
+            event_id = f"{today_key}-{event['hour']}-{event['minute']}"
+            if event_id not in triggered_today:
+                if now.hour == event["hour"] and now.minute == event["minute"]:
+                    send_message_to_frontend(event["msg"])
+                    triggered_today.add(event_id)
+
+        if (datetime.now() - last_interaction).seconds > INACTIVITY_THRESHOLD:
+            send_message_to_frontend("哼，把我晾这儿好久了~")
+            last_interaction = datetime.now()
+
+        time.sleep(CHECK_INTERVAL)
+
+
+threading.Thread(target=proactive_loop, daemon=True).start()
+
+
+# ===========================
+# 文件读写
+# ===========================
 def load_json(path: Path, default):
     try:
         return json.loads(path.read_text(encoding="utf-8"))
@@ -37,8 +91,9 @@ def save_json(path: Path, data):
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
-# ===== 长期记忆 =====
-
+# ===========================
+# 长期记忆
+# ===========================
 def load_long_term() -> list[dict]:
     return load_json(LONG_MEM_PATH, [])
 
@@ -48,18 +103,16 @@ def save_long_term(memories: list[dict]):
 
 
 def build_long_term_prompt(memories: list[dict]) -> str:
-    """将长期记忆组装成 system prompt 的一段"""
     if not memories:
         return ""
     lines = ["\n【小菜的长期记忆】"]
-    for m in memories[-5:]:  # 最多注入最近 5 条摘要
+    for m in memories[-5:]:
         lines.append(f"- {m.get('summary', '')}")
     return "\n".join(lines)
 
 
 def summarize_and_archive(history: list[dict]):
-    """取最旧的几条对话，让 LLM 总结后归档到长期记忆"""
-    archive_msgs = history[: ARCHIVE_BATCH * 2]  # 取 N 轮 = N*2 条消息
+    archive_msgs = history[: ARCHIVE_BATCH * 2]
     text = "\n".join(
         f"{'主人' if m['role'] == 'user' else '小菜'}: {m['content']}"
         for m in archive_msgs
@@ -89,18 +142,19 @@ def summarize_and_archive(history: list[dict]):
         summary = "(归档失败)"
 
     if summary == "无":
-        return  # 没什么好记的，直接丢弃
+        return
 
     memories = load_long_term()
     memories.append({
-        "time": __import__("datetime").datetime.now().strftime("%m-%d %H:%M"),
+        "time": datetime.now().strftime("%m-%d %H:%M"),
         "summary": summary,
     })
     save_long_term(memories)
 
 
-# ===== 短期记忆 =====
-
+# ===========================
+# 短期记忆
+# ===========================
 def load_short_term() -> list[dict]:
     return load_json(SHORT_MEM_PATH, [])
 
@@ -114,7 +168,6 @@ def append_short_term(user_msg: str, reply: str):
     history.append({"role": "user", "content": user_msg})
     history.append({"role": "assistant", "content": reply})
 
-    # 超过上限 → 归档一批
     while len(history) > SHORT_MAX_ROUNDS * 2:
         batch = history[: ARCHIVE_BATCH * 2]
         summarize_and_archive(batch)
@@ -124,8 +177,9 @@ def append_short_term(user_msg: str, reply: str):
     return history
 
 
-# ===== 宠物状态 =====
-
+# ===========================
+# 宠物状态 & System Prompt
+# ===========================
 def load_memory() -> dict:
     return load_json(MEMORY_PATH, {
         "username": "主人",
@@ -165,14 +219,12 @@ def build_system_prompt(memory: dict) -> str:
         "4. 示例：[emotion:talking] 哼，你还知道来找我？😏"
     )
 
-    # 注入长期记忆
     long_memories = load_long_term()
     mem_text = build_long_term_prompt(long_memories)
     if mem_text:
         prompt += mem_text
 
-    # 注入当前时间，让小菜有准确的时间感知
-    now = __import__("datetime").datetime.now()
+    now = datetime.now()
     time_str = now.strftime("%Y年%m月%d日（%A） %H:%M")
     prompt += f"\n当前时间：{time_str}"
 
@@ -180,7 +232,6 @@ def build_system_prompt(memory: dict) -> str:
 
 
 def parse_emotion(text: str) -> str:
-    import re
     m = re.match(r"^\[emotion:([^\]]+)\]", text)
     if m:
         emotion = m.group(1).strip()
@@ -189,8 +240,6 @@ def parse_emotion(text: str) -> str:
 
 
 def strip_emotion_prefix(text: str) -> str:
-    import re
-    # 去掉开头和中间所有的 [emotion:xxx] 标签
     return re.sub(r"\[emotion:[^\]]+\]\s*", "", text).strip()
 
 
@@ -215,7 +264,16 @@ def call_llm(messages: list[dict]) -> str | None:
         return None
 
 
-# ===== Routes =====
+# ===========================
+# HTTP Routes
+# ===========================
+@app.route("/focus_done", methods=["POST"])
+def focus_done():
+    global last_interaction
+    last_interaction = datetime.now()
+    send_message_to_frontend("完成 25 分钟专注啦，好棒~")
+    return {"status": "ok"}
+
 
 @app.route("/chat", methods=["POST"])
 def chat():
@@ -240,13 +298,11 @@ def chat():
     if reply is None:
         return jsonify({"reply": "啊？我好像断网了…", "emotion": "idle"})
 
-    # 持久化短期记忆 + 自动归档
     append_short_term(user_msg, reply)
 
     emotion = parse_emotion(reply)
     clean_reply = strip_emotion_prefix(reply)
 
-    # 好感度持久化
     memory["favor"] = memory.get("favor", 0) + 1
     save_memory(memory)
 
@@ -258,7 +314,6 @@ def get_history():
     short_term = load_short_term()
     long_term = load_long_term()
 
-    # 格式化短期记忆为可读文本
     readable_short = []
     for msg in short_term:
         role = "主人" if msg["role"] == "user" else "小菜"
@@ -276,6 +331,9 @@ def reset_conversation():
     return jsonify({"status": "ok"})
 
 
+# ===========================
+# 启动
+# ===========================
 if __name__ == "__main__":
     port = 5000
     print(f"小菜后端启动 → http://127.0.0.1:{port}")

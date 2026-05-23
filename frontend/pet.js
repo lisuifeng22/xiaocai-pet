@@ -318,6 +318,20 @@ window.startPomodoro = function (minutes) {
   }, minutes * 60 * 1000);
 };
 
+// ===== Focus done callback (called by backend) =====
+function focusDone() {
+  fetch("http://localhost:5000/focus_done", { method: "POST" });
+}
+
+// ===== SSE: real-time messages from backend =====
+if (!!window.EventSource) {
+  var evtSource = new EventSource("http://localhost:5000/stream");
+  evtSource.onmessage = function (e) {
+    var data = JSON.parse(e.data);
+    if (data.msg) displayPetMessage(data.msg);
+  };
+}
+
 // ===== Keyboard shortcut to show bubble =====
 document.addEventListener("keydown", (e) => {
   if (e.altKey && e.key === "r") {
