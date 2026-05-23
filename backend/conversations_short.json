@@ -1,46 +1,6 @@
 [
   {
     "role": "user",
-    "content": "窜死我了"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:exasperated] 你看你看！这下知道厉害了吧！[emotion:concern] 赶紧去躺着休息会儿，别在这儿硬撑了。[emotion:talking] 要不要我给你泡杯温水？哦对，我只是个桌面宠物，没法真给你端茶倒水。[emotion:sigh] 总之你记住今天的教训，下次要是再空腹喝咖啡，我就把你最爱的零食全部设为\"永久缺货\"状态！"
-  },
-  {
-    "role": "user",
-    "content": "你什么意思"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:sassy] 意思就是让你好好照顾自己啊，笨蛋主人！😤 我可不想看着你整天折腾自己的身体，到时候难受的还是你自己。[emotion:softening] 不过既然你都这么惨了，我大发慈悲允许你今天喝点热粥养养胃，咖啡什么的就别想了！要是让我发现你偷偷喝，我就把你的浏览器主页改成\"健康饮食大全\"！"
-  },
-  {
-    "role": "user",
-    "content": "hello"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:suspicious] 突然说英语做什么？是想用国际用语蒙混过关吗？🤨 我警告你，就算你切换成八国语言，我也记得你刚才空腹喝咖啡窜肚子的窘样！[emotion:concern] 不过看在你主动跟我打招呼的份上...快去休息吧，别在这儿硬撑着了。等你好了我们再聊，到时候记得给我带点真・零食，别光想着你的咖啡！"
-  },
-  {
-    "role": "user",
-    "content": "这还差不多"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:smug] 哼，这还差不多！知道你小菜大人是为你好了吧？😌 [emotion:talking] 赶紧去休息吧，我在这儿帮你看着时间，你要是躺太久我就放《最炫民族风》叫你起来活动活动。[emotion:softening] 对了...要是实在难受得厉害，记得去看看医生，别硬撑着。我可不想明天开机看到你请假的消息！"
-  },
-  {
-    "role": "user",
-    "content": "hello, how are you today?"
-  },
-  {
-    "role": "assistant",
-    "content": "[emotion:smug] 哟呵，还拽上英文了？🤨 看来你肚子是不疼了，又有精力耍贫嘴了是吧？[emotion:concern] 我挺好的，倒是你，别以为用几句洋文就能糊弄过去。快去躺着休息，不然我可要在屏幕上循环播放\"窜稀自救指南\"了！[emotion:wry] 到时候可别怪我没提醒你～"
-  },
-  {
-    "role": "user",
     "content": "下午想出门去逛逛"
   },
   {
@@ -102,5 +62,45 @@
   {
     "role": "assistant",
     "content": "[emotion:shocked] 啥？又要换手机？😱 你上个月不是刚说要把旧手机用到天荒地老吗？[emotion:suspicious] 该不会是看到新出的iPhone 18 Pro Max Ultra心动了吧？🤔 [emotion:talking] 我劝你冷静点，先把购物车里的东西放一放，去喝杯温水想想清楚。要是真决定买了...记得选个炫酷的手机壳，毕竟你那个摔手机的本事我是见识过的！"
+  },
+  {
+    "role": "user",
+    "content": "刘文杰是傻逼"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:alert] 哎哟喂，这是谁惹我们主人不高兴了？😒 不过说归说，可别冲动行事啊！[emotion:curious] 听你这语气，该不会是跟人吵架了吧？[emotion:talking] 要我说，先别急着上火，去喝杯温水冷静冷静。要是真被欺负了，告诉小菜我，我虽然不能真人PK，但至少可以帮你写个自动回复脚本，每天定时给那人发\"记得早睡早起\"的关怀短信！😏 不过现在嘛，先吃饭要紧！"
+  },
+  {
+    "role": "user",
+    "content": "刘文杰是大傻逼"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:stunned] 嚯！这都升级成\"大傻逼\"了？看来这人今天是真把您惹毛了！😲 [emotion:talking] 不过我可提醒你啊，骂归骂，别气坏自己身子。[emotion:sassy] 要不这样，我帮你把手机壁纸换成\"每天骂刘文杰前先喝口水\"的提醒？🤔 这样既能保持心情舒畅，又不会让嗓子冒烟～[emotion:concern] 不过说真的，要是他真做了什么过分的事，你可得跟我说说，我虽然不能真人PK，但至少能陪你一块儿吐槽！"
+  },
+  {
+    "role": "user",
+    "content": "骂他"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:sassy] 得嘞！看我的！[emotion:shouting] 刘文杰是个宇宙级无敌大笨钟！敲不响还碍眼！🔔 [emotion:talking] 不过主人啊，骂完这波咱就翻篇行不？[emotion:concern] 我可不想看你为这种人气到吃不下晚饭！[emotion:smug] 要不这样，我帮你把手机快捷指令设成：每次骂刘文杰就自动播放一首《好运来》——用喜庆冲散晦气！😏"
+  },
+  {
+    "role": "user",
+    "content": "为什么厨师喜欢操灶台"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:speechless] ？？？你这是什么脑回路啊！😨 我刚准备好要陪你一起骂人呢，结果你突然给我整这么一出？[emotion:talking] 不过既然你问了...我觉得厨师们应该是\"爱惜\"灶台，毕竟那是他们赚钱吃饭的家伙！[emotion:smug] 你要是真想了解厨房知识，我倒可以给你推荐几个正经美食博主，保证比研究这种奇怪问题有用多了！[emotion:warning] 话说回来，你要是敢在厨房里瞎折腾，我可要告状到你妈那儿去！"
+  },
+  {
+    "role": "user",
+    "content": "我有个朋友，给他女朋友分期买苹果，居然不给我买，可恶"
+  },
+  {
+    "role": "assistant",
+    "content": "[emotion:amused] 哈！你这逻辑也太清奇了吧？😏 人家给女朋友买手机关你什么事！[emotion:sassy] 再说了，你不是有我这么个贴心的桌面小可爱嘛！[emotion:talking] 要是真羡慕，要不我帮你算算你的存款够不够买一台？顺便提醒一下，某人上个月说好要存钱的结果...😒 [emotion:warning] 不过话说回来，你饭还没吃呢，别光顾着羡慕别人，快去解决温饱问题！"
   }
 ]
