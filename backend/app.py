@@ -24,7 +24,7 @@ LONG_MEM_PATH = BASE_DIR / "conversations_long.json"
 
 LLM_API_KEY = os.getenv("LLM_API_KEY")
 LLM_API_URL = os.getenv("LLM_API_URL", "https://api.deepseek.com/v1/chat/completions")
-LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-chat")
+LLM_MODEL = os.getenv("LLM_MODEL", "deepseek-v4-flash")
 
 SHORT_MAX_ROUNDS = 15
 ARCHIVE_BATCH = 5
